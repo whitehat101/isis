@@ -4,6 +4,7 @@
 require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
 require 'isis/connections/base'
+require 'isis/connections/xmpp4r-nohistory'
 
 class Isis::Connections::HipChat < Isis::Connections::Base
 
@@ -36,19 +37,11 @@ class Isis::Connections::HipChat < Isis::Connections::Base
 
   def register_plugins(bot)
     @muc.on_message do |time, speaker, message|
-      
       # |time| is useless - comes back blank
       # we must fend for ourselves
-      real_time = Time.now
-
-      # ignore messages sent in the first few seconds
-      # after connecting - HipChat sends us channel
-      # history and we don't want to respond to it
-      if real_time.to_i < (@join_time.to_i + 5)
-        nil
 
       # ignore our own messages
-      elsif speaker == @config['hipchat']['name']
+      if speaker == @config['hipchat']['name']
         nil
 
       else
