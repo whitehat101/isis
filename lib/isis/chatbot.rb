@@ -37,6 +37,7 @@ module Isis
 
     def join
       @connection.join
+      speak @config['bot']['hello']
     end
 
     def speak(message)
@@ -56,7 +57,7 @@ module Isis
         trap(sig) do
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
-          self.speak @config['bot']['goodbye']
+          speak @config['bot']['goodbye']
           EventMachine::stop_event_loop
         end
       end

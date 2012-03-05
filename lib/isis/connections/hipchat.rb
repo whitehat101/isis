@@ -76,7 +76,6 @@ class Isis::Connections::HipChat < Isis::Connections::Base
 
   def join
     @muc.join(@config['hipchat']['room'] + '/' + @config['hipchat']['name'])
-    self.speak @config['bot']['hello']
   end
 
   def speak(message)
