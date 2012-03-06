@@ -12,7 +12,7 @@ class Isis::Plugin::EchoInTheCave < Isis::Plugin::Base
 
     MAP.each do |k,v|
       if msg.match /#{k}/i
-        @msg = msg.gsub /#{k}/i, v
+        @msg = @msg.gsub /#{k}/i, v
         matched = true
       end
     end
