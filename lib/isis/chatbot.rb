@@ -59,7 +59,7 @@ module Isis
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
           speak @config['bot']['goodbye']
-          EventMachine::stop_event_loop
+          EventMachine::Timer.new(1) { EventMachine::stop_event_loop }
         end
       end
     end
