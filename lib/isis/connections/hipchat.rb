@@ -40,11 +40,12 @@ class Isis::Connections::HipChat < Isis::Connections::Base
       # |time| is useless - comes back blank
       # we must fend for ourselves
 
+      # always respond to commands prefixed with 'sudo '
       sudo = message.match /^sudo (.+)/
       message = sudo[1] if sudo
 
       # ignore our own messages
-      if speaker == @config['hipchat']['name'] and sudo.nil?
+      if speaker == @config['hipchat']['name'] and not sudo
         nil
 
       else
