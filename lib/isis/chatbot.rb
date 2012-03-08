@@ -38,7 +38,7 @@ module Isis
 
     def join
       @connection.join
-      speak @config['bot']['hello']
+      EventMachine::Timer.new(1) { speak @config['bot']['hello'] }
     end
 
     def speak(message)
