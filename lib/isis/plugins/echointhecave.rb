@@ -2,8 +2,9 @@ require 'isis/plugins/base'
 
 class Isis::Plugin::EchoInTheCave < Isis::Plugin::Base
   MAP = {
-    "@cave" => "@1 @2 @3",
-    "@zoidberg" => "@fry"
+    "@cave" => "@brendon @jeremy @jon @robert @sebastian",
+    "@zoidberg" => "@fry",
+    "@seabass" => "@sebastian",
   }
 
   def respond_to_msg?(msg, speaker)
