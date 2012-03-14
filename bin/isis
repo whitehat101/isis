@@ -2,4 +2,4 @@
 require 'rubygems'
 require 'daemons'
 
-Daemons.run('isis-run.rb')
+Daemons.run(File.dirname(__FILE__) + '/isis-run.rb')
