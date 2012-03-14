@@ -53,6 +53,10 @@ class Isis::Plugin::RandomResponses < Isis::Plugin::Base
     [/\bwednesday\b/i, "http://i235.photobucket.com/albums/ee292/PalomaCortez/Happy-Wednesday.jpg"],
     [/\blearn ruby\b/i, ["Learn Ruby or DIE","http://img405.imageshack.us/img405/3670/yourlifecoulddependonit.jpg"]],
     [/\bgithub\b/i, "http://1.bp.blogspot.com/-IpYLCdp3mvg/ThljXpv9VEI/AAAAAAAAAEU/XXH6gWP5wMk/s320/o6pi.jpg"],
+    [/\bmeh\b/i, "http://farm5.static.flickr.com/4122/4869449359_1576cf6d18.jpg"],
+    [/\bbig\s+kitty.+slow/i, "http://i.imgur.com/vNRuc.jpg"],
+    [/em.+\bdanno/i, "http://www.internetweekly.org/images/delay_book_em_danno.jpg"],
+    [/\bclown\b/i, "404 There are no clowns here."],
     [/\bone of us\b/i, "http://img851.imageshack.us/img851/4459/oneofus.jpg"]
   ]
 
