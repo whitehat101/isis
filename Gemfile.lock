@@ -1,6 +1,9 @@
 GEM
   remote: http://www.rubygems.org/
   specs:
+    RubyInline (3.11.2)
+      ZenTest (~> 4.3)
+    ZenTest (4.7.0)
     activesupport (3.0.9)
     addressable (2.2.6)
     classifier (1.3.1)
@@ -11,12 +14,14 @@ GEM
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
       rack (>= 1.1.0, < 2)
+    fuzzy-string-match (0.9.3)
+      RubyInline (>= 3.8.6)
+      RubyInline (>= 3.8.6)
     http_parser.rb (0.5.1)
     mime-types (1.16)
     multipart-post (1.1.3)
     nokogiri (1.5.0)
     rack (1.3.2)
-    sequel (3.32.0)
     simple_oauth (0.1.5)
     stemmer (1.0.1)
     tinder (1.4.4)
@@ -39,8 +44,8 @@ PLATFORMS
 
 DEPENDENCIES
   daemons
+  fuzzy-string-match
   nokogiri
-  sequel
   tinder
   twss
   xmpp4r
