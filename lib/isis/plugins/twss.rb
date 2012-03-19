@@ -18,7 +18,7 @@ module TWSS
         # false
         0.0
       end
-    end 
+    end
   end
 end
 
@@ -36,6 +36,8 @@ class Isis::Plugin::TWSS < Isis::Plugin::Base
       false
     else
       @shesaid = TWSS(msg)
+      puts "TWSS(#{"%.3f" % @shesaid}): #{msg}\n"
+      @shesaid
     end
   end
 
