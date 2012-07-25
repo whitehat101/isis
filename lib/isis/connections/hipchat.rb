@@ -4,20 +4,21 @@
 require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
 require 'isis/connections/base'
-require 'em-timers'
+require 'isis/services'
 
 class Isis::Connections::HipChat < Isis::Connections::Base
 
-  attr_accessor :client
-  attr_accessor :muc
+  attr_accessor :client, :muc
 
   def initialize(config)
     load_config(config)
     @client = Jabber::Client.new(@config['hipchat']['jid'])
 
     @muc = {}
+    @services = {}
     @config['hipchat']['rooms'].each do |room|
       @muc[room] = Jabber::MUC::SimpleMUCClient.new(client)
+      @services[room] = []
     end
   end
 
@@ -42,6 +43,10 @@ class Isis::Connections::HipChat < Isis::Connections::Base
   def register_plugins(bot)
     @muc.each do |room,muc|
       register_plugins_internal(muc, bot)
+
+      bot.config['enabled_services'].each do |plugin|
+        @services[room] << eval("Isis::Service::#{plugin}").new(room,muc)
+      end
     end
   end
 
@@ -92,12 +97,6 @@ class Isis::Connections::HipChat < Isis::Connections::Base
     @muc.each do |room,muc|
       puts "Joining: #{room}/#{@config['hipchat']['name']} maxstanzas:#{@config['hipchat']['history']}"
       muc.join "#{room}/#{@config['hipchat']['name']}", @config['hipchat']['password'], :history => @config['hipchat']['history']
-
-      # if room === '1859_jeremy_bot@conf.hipchat.com'
-      if room === '1859_engineering_room@conf.hipchat.com'
-        EM::Timers.cron('40 8 * * 1-5') { speak muc, "sudo !archer" }
-        EM::Timers.cron('55 8 * * 1-5') { speak muc, "sudo !archer" }
-      end
     end
   end
 

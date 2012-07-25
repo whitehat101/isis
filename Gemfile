@@ -8,4 +8,4 @@ gem 'daemons'
 gem 'twss'
 gem 'nokogiri'
 gem 'amatch'
-gem 'em-timers', :git => "https://github.com/g1nn13/em-timers.git"
+gem 'em-timers', :git => "https://github.com/whitehat101/em-timers.git"
