@@ -76,14 +76,6 @@ class Isis::Connections::HipChat < Isis::Connections::Base
         end
       end
     end
-
-    muc.on_private_message do |time, speaker, message|
-      puts "private-MESSAGE: s:#{sudo} s:#{speaker} m:#{message}"
-    end
-
-    muc.on_room_message do |time, message|
-      puts "room-MESSAGE: s:#{sudo} s:#{speaker} m:#{message}"
-    end
   end
   private :register_plugins_internal
 
