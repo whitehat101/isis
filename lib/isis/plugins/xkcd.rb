@@ -140,7 +140,7 @@ private
     # Load Asynchronusly
     EM.next_tick do
       id_parse = /(\d+)/ # ID parsing regexp
-      archive = Nokogiri::HTML(open('http://xkcd.com/archive/'))
+      archive = Nokogiri::HTML(open('http://xkcd.com/archive/').read)
 
       archive.css('#middleContainer > a').each do |data|
         if(match = id_parse.match(data[:href]))
