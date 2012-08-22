@@ -49,6 +49,10 @@ class Isis::Connections::HipChat < Isis::Connections::Base
       # |time| is useless - comes back blank
       # we must fend for ourselves
 
+      # All UTF-8, All the time
+      message.encode!("UTF-8")
+      speaker.encode!("UTF-8")
+
       # always respond to commands prefixed with 'sudo '
       sudo = message.match /^sudo (.+)/
       message = sudo[1] if sudo
