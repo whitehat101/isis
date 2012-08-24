@@ -12,8 +12,11 @@ class Isis::Connections::HipChat < Isis::Connections::Base
 
   def initialize(config)
     load_config(config)
-    @client = Jabber::Client.new(@config['hipchat']['jid'])
+    create_jabber_and_mucs
+  end
 
+  def create_jabber_and_mucs
+    @client = Jabber::Client.new(@config['hipchat']['jid'])
     @muc = {}
     @config['hipchat']['rooms'].each do |room|
       @muc[room] = Jabber::MUC::SimpleMUCClient.new(client)
@@ -29,6 +32,16 @@ class Isis::Connections::HipChat < Isis::Connections::Base
     @client.auth(@config['hipchat']['password'])
     send_jabber_presence
     @join_time = Time.now
+  end
+
+  def reconnect
+    kill_and_clean_up
+    create_jabber_and_mucs
+    connect
+  end
+
+  def kill_and_clean_up
+    @client.close
   end
 
   def register_disconnect_callback
@@ -86,7 +99,12 @@ class Isis::Connections::HipChat < Isis::Connections::Base
   def join
     @muc.each do |room,muc|
       puts "Joining: #{room}/#{@config['hipchat']['name']} maxstanzas:#{@config['hipchat']['history']}"
-      muc.join "#{room}/#{@config['hipchat']['name']}", @config['hipchat']['password'], :history => @config['hipchat']['history']
+      begin
+        muc.join "#{room}/#{@config['hipchat']['name']}", @config['hipchat']['password'], :history => @config['hipchat']['history']
+      rescue => e
+        puts "## EXCEPTION in Hipchat join: #{e.message}"
+        bot.recover_from_exception
+      end
     end
   end
 

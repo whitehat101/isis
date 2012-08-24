@@ -11,8 +11,24 @@ module Isis
     attr_accessor :config, :connection, :plugins
 
     def initialize
-      @config = YAML::load(File.read(File.join(ROOT_FOLDER, 'config.yml')))
+      load_config
       load_plugins
+      create_connection
+    end
+
+    def load_config
+      @config = YAML::load(File.read(File.join(ROOT_FOLDER, 'config.yml')))
+    end
+
+    def load_plugins
+      @plugins = []
+      class_prefix = "Isis::Plugin::"
+      @config['enabled_plugins'].each do |plugin|
+        @plugins << eval(class_prefix + plugin).new
+      end
+    end
+
+    def create_connection
       @connection = case @config['service']
       when 'hipchat'
         Isis::Connections::HipChat.new(config)
@@ -23,26 +39,35 @@ module Isis
       end
     end
 
-    def load_plugins
-      self.plugins = []
-      class_prefix = "Isis::Plugin::"
-
-      @config['enabled_plugins'].each do |plugin|
-        self.plugins << eval(class_prefix + plugin).new
-      end
+    def recover_from_exception
+      create_connection
     end
 
     def connect
       @connection.connect
     end
 
+    def reconnect
+      @connection.reconnect
+    end
+
     def join
-      @connection.join
+      begin
+        @connection.join
       EventMachine::Timer.new(1) { speak @config['bot']['hello'] }
+      rescue => e
+        puts "## EXCEPTION in Chatbot join: #{e.message}"
+        recover_from_exception
+      end
     end
 
     def speak(message)
-      @connection.yell message
+      begin
+        @connection.yell message
+      rescue => e
+        puts "## EXCEPTION in Chatbot speak: #{e.message}"
+        recover_from_exception
+      end
     end
 
     def register_plugins
@@ -71,16 +96,15 @@ module Isis
       join
 
       # am I still connected, bro? Check every 10 seconds
-      EventMachine::add_periodic_timer(10) {
+      EventMachine::add_periodic_timer(10) do
         unless still_connected?
           puts "Disconnected! Reconnecting..."
-          connect
+          reconnect
           trap_signals
           register_plugins
           join
         end
-      }
+      end
     end
-
   end
 end
