@@ -28,7 +28,6 @@ module Isis
     end
 
     def create_connection
-      @config['hipchat']['history'] = 0 if @disable_history  # HACK for now
       begin
         require "isis/connections/#{config['service']}"
       rescue
@@ -50,7 +49,8 @@ module Isis
     # Recreate connection with no history loading, so we don't load any messages
     # that may have triggered the exception
     def recover_from_exception
-      @disable_history = true
+      # WARN: campfire users will likely recieve an additional exception here
+      config['hipchat']['history'] = 0
       create_connection
     end
 
