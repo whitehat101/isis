@@ -36,14 +36,14 @@ module Isis
       end
 
       @connection = case config['service']
-      when 'hipchat'
-        Isis::Connections::HipChat.new(config)
+        when 'hipchat'
+          Isis::Connections::HipChat.new(config)
         when 'hipchat-smackr'
           Isis::Connections::HipChatSmackr.new(config)
-      when 'campfire'
-        Isis::Connections::Campfire.new(config)
-      else
-        raise "Invalid service selected - please check your config.yml"
+        when 'campfire'
+          Isis::Connections::Campfire.new(config)
+        else
+          raise "Invalid service selected - please check your config.yml"
       end
     end
 
@@ -55,17 +55,17 @@ module Isis
     end
 
     def connect
-      @connection.connect
+      connection.connect
     end
 
     def reconnect
-      @connection.reconnect
+      connection.reconnect
     end
 
     def join
       begin
-        @connection.join
-      EventMachine::Timer.new(1) { speak @config['bot']['hello'] }
+        connection.join
+      EventMachine::Timer.new(1) { speak config['bot']['hello'] }
       rescue => e
         puts "## EXCEPTION in Chatbot join: #{e.message}"
         recover_from_exception
@@ -74,7 +74,7 @@ module Isis
 
     def speak(message)
       begin
-        @connection.yell message
+        connection.yell message
       rescue => e
         puts "## EXCEPTION in Chatbot speak: #{e.message}"
         recover_from_exception
@@ -82,11 +82,11 @@ module Isis
     end
 
     def register_plugins
-      @connection.register_plugins(self)
+      connection.register_plugins(self)
     end
 
     def still_connected?
-      @connection.still_connected?
+      connection.still_connected?
     end
 
     def trap_signals
@@ -94,7 +94,7 @@ module Isis
         trap(sig) do
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
-          speak @config['bot']['goodbye']
+          speak config['bot']['goodbye']
           EventMachine::Timer.new(1) { EventMachine::stop_event_loop }
         end
       end
