@@ -38,6 +38,8 @@ module Isis
       @connection = case config['service']
       when 'hipchat'
         Isis::Connections::HipChat.new(config)
+        when 'hipchat-smackr'
+          Isis::Connections::HipChatSmackr.new(config)
       when 'campfire'
         Isis::Connections::Campfire.new(config)
       else

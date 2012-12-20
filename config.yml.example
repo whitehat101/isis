@@ -1,7 +1,7 @@
 # config.yml
 
 ## SERVICES ##
-# Supported values: hipchat, campfire
+# Supported values: hipchat, campfire, hipchat-smackr
 service: hipchat
 
 ## HIPCHAT SETTINGS ##
