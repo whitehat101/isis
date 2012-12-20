@@ -3,7 +3,6 @@
 require 'yaml'
 require 'singleton'
 require 'isis/plugins'
-require 'isis/connections'
 
 module Isis
   class Chatbot
@@ -30,7 +29,13 @@ module Isis
 
     def create_connection
       @config['hipchat']['history'] = 0 if @disable_history  # HACK for now
-      @connection = case @config['service']
+      begin
+        require "isis/connections/#{config['service']}"
+      rescue
+        raise "Unknown service - please check your config.yml"
+      end
+
+      @connection = case config['service']
       when 'hipchat'
         Isis::Connections::HipChat.new(config)
       when 'campfire'
