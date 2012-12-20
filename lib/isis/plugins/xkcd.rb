@@ -8,6 +8,7 @@ class Isis::Plugin::XKCD < Isis::Plugin::Base
   def initialize
     # Setup Comic Archive
     @dbready = false
+    @callbacks = []
     load_archive
   end
 
@@ -21,9 +22,10 @@ class Isis::Plugin::XKCD < Isis::Plugin::Base
 
     return case
     when !@dbready
+      @callbacks << [@room,@commands]
       ["Hold up, I'm not ready yet."]
 
-    when (!defined?(verb) or verb.blank? or verb == "random")
+    when (verb.nil? or verb == "random")
       load_comic 'http://dynamic.xkcd.com/random/comic/'
 
     when (verb == "new" or verb == "last")
@@ -50,6 +52,7 @@ class Isis::Plugin::XKCD < Isis::Plugin::Base
       @last_comic.to_s
 
     when verb == "reload"
+      @callbacks << [@room,@commands]
       load_archive
 
     when (verb == "commands" or verb == "help" or verb == "--help" or verb == "-h")
@@ -155,11 +158,12 @@ private
 
       @dbready = true
 
-      # puts @comic_titles.inspect
-      # puts @comic_dates.inspect
-
-      # print out the number of records
-      puts "xkcd: Loaded #{@last_comic} comics"
+      puts "xkcd: Loaded #{@last_comic} comics -- #{@callback}"
+      @callbacks.each do |room,commands|
+        room.send_message "xkcd: Loaded #{@last_comic} comics"
+        @commands = commands
+        [response].flatten.each {|line| room.send_message line }
+      end.clear
     end # end EM
     "Refreshing Comics..."
   end
