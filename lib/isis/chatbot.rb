@@ -29,6 +29,7 @@ module Isis
     end
 
     def create_connection
+      @config['hipchat']['history'] = 0 if @disable_history  # HACK for now
       @connection = case @config['service']
       when 'hipchat'
         Isis::Connections::HipChat.new(config)
@@ -39,7 +40,10 @@ module Isis
       end
     end
 
+    # Recreate connection with no history loading, so we don't load any messages
+    # that may have triggered the exception
     def recover_from_exception
+      @disable_history = true
       create_connection
     end
 
