@@ -28,7 +28,7 @@ campfire:
 
 ## BOT SETTINGS ##
 bot:
-  hello: Mainframe: ONLINE
+  hello: 'Mainframe: ONLINE'
   goodbye: NO CARRIER
 
 ## PLUGIN SETTINGS ##
