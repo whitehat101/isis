@@ -58,7 +58,13 @@ class Isis::Connections::HipChatSmackr < Isis::Connections::Base
         sudo = message.match /^sudo (.+)/
         message = sudo[1] if sudo
 
-        puts "MSG: #{speaker}: #{message} | #{sudo}"
+        puts 42
+        who = speaker.to_s.green
+        puts 42
+        who = who.underline if sudo
+        puts 42
+        puts "#{who}: #{message.to_s.white}"
+        puts 42
 
         # ignore our own messages
         if speaker == @config['hipchat']['name'] and not sudo

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'daemons'
+gem "colored", "~> 1.2"
 
 # Hipchat (XMPP4R)
 # The released xmppr4 gem is quite dated, and has bugs
