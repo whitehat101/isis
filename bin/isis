@@ -1,11 +1,19 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'bundler/setup'
-require 'daemons'
+# require 'bundler/setup'
 
-Daemons.run "#{File.dirname(__FILE__)}/isis-run.rb",
-  :app_name   => 'isis',
-  :dir        => '../tmp/',
-  :log_output => true,
-  :backtrace  => true,
-  :monitor    => true
+if RUBY_PLATFORM == "java"
+  require 'spoon'
+  pid = Spoon.spawnp "#{File.dirname(__FILE__)}/isis-run.rb"
+  puts "Launched ISIS (pid=#{pid})"
+
+else
+  require 'daemons'
+
+  Daemons.run "#{File.dirname(__FILE__)}/isis-run.rb",
+    :app_name   => 'isis',
+    :dir        => '../tmp/',
+    :log_output => true,
+    :backtrace  => true,
+    :monitor    => true
+end

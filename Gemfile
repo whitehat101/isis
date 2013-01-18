@@ -1,13 +1,22 @@
 source 'https://rubygems.org'
-gem 'daemons'
-gem "colored", "~> 1.2"
 
+## MRI
+gem 'daemons'
 # Hipchat (XMPP4R)
 # The released xmppr4 gem is quite dated, and has bugs
 gem 'xmpp4r', :git => "https://github.com/whitehat101/xmpp4r.git"
 
+
+## jRuby
+gem 'spoon'
 # Hipchat (smackr/jruby)
 gem 'smackr', '0.0.3.a', :git => "git://github.com/where/smackr.git", :platform => 'jruby'
+
+
+
+gem "colored", "~> 1.2"
+
+
 
 # Campfire
 gem 'tinder'

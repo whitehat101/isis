@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-# encoding: UTF-8
+require 'rubygems'
+require 'bundler/setup'
 
 lib_dir = File.expand_path(File.join(File.dirname(__FILE__), "../lib"))
 
@@ -8,7 +9,6 @@ if File.exist?(File.join(lib_dir, "isis.rb"))
 end
 
 require 'isis'
-require 'isis/chatbot'
 
 EM.run do
   @bot = Isis::Chatbot.new
