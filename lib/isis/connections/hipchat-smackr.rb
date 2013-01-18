@@ -49,7 +49,7 @@ class Isis::Connections::HipChatSmackr < Isis::Connections::Base
          history: config['hipchat']['history']
       }
 
-      puts "About to join: #{room_name} #{opts}"
+      puts "About to join: #{room_name} #{opts}".green
       rooms[room_name] = client.join_room room_name, opts do |msg,room|
         message = msg.get_body
         speaker = msg.get_from.split('/').last
@@ -57,21 +57,23 @@ class Isis::Connections::HipChatSmackr < Isis::Connections::Base
         # always respond to commands prefixed with 'sudo '
         sudo = message.match /^sudo (.+)/
         message = sudo[1] if sudo
+        self_speaking = speaker == @config['hipchat']['name']
 
-        puts 42
-        who = speaker.to_s.green
-        puts 42
+        who =
+          if self_speaking
+            speaker.yellow
+          else
+            speaker.green
+          end
         who = who.underline if sudo
-        puts 42
-        puts "#{who}: #{message.to_s.white}"
-        puts 42
+        puts "#{who}: #{message.white}"
+
+        # self_speaking = false # TEST
 
         # ignore our own messages
-        if speaker == @config['hipchat']['name'] and not sudo
-          nil
-
-        else
+        unless self_speaking and not sudo
           @plugins.each do |plugin|
+            # puts "#{plugin.to_s.underline}"
             begin
               response = plugin.receive_message(message, speaker, room)
               unless response.nil?
