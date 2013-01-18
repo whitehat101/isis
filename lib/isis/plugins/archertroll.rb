@@ -4,8 +4,15 @@ require 'isis/plugins/base'
 class Isis::Plugin::ArcherTroll < Isis::Plugin::Base
 
   def respond_to_msg?(msg, speaker)
+
     QUOTES.each do |quote,response|
-      if msg.match quote
+      # puts "\t#{msg.white}"
+      # puts "\t#{quote.to_s.black_on_white}"
+      # puts "\t#{quote.to_s.red}"  if( msg <=> quote) == 0
+      # puts "\t#{quote.to_s.blue}"  if msg.match quote
+      # puts "\t#{quote.to_s.green}" if quote.match msg
+
+      if (msg <=> quote) == 0
         @response = response
         return true
       end
