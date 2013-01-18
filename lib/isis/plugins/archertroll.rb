@@ -1,3 +1,4 @@
+# encoding: utf-8
 # archer.rb
 require 'isis/plugins/base'
 
@@ -73,7 +74,8 @@ class Isis::Plugin::ArcherTroll < Isis::Plugin::Base
     "\"Seriously, you cheated on me with Carol!?\" -- Lana Kane" => "http://cdn.memegenerator.net/instances/250x250/25561462.jpg",
     "\"He'll be back! Crying for his mommy, just like that Christmas break when I moved and forgot to give the boarding school my new address. I mean he rode the train all the way into town he couldn't pick up a phone book!? 9 years old and crying for his mommy in that Police Station like a little girl! What does that tell you?\" -- Malory Archer" => "http://www.vunie.com/wp-content/uploads/funny-picture-whenever-i-see-a-phone-book-outside-my-door-560x417.jpg",
     "\"Oh shut up. I bet you're barren.\" -- Malory Archer" => "http://3.bp.blogspot.com/_mGq93ifzOcg/SGmDnpx9EXI/AAAAAAAAAHo/PS0ZEUtcI1A/s400/Barren+Blog.jpg",
-    "\"Bring me some posion Pam because I don't wish to live anymore! I'm dead inside...\" -- Malory Archer" => "http://www.wpclipart.com/medical/symbols/poison_sign.png",
+    "\"Bring me some posion Pam because I don't wish to live anymore! I'm dead inside...\" -- Malory Archer" => "http://www.wpclipart.com/medical/symbols/poison_sign.png", # brendon
+    "\"Bring me some poison Pam because I don't wish to live anymore! I'm dead inside...\" -- Malory Archer" => "http://www.wpclipart.com/medical/symbols/poison_sign.png",
     # "\"Freeze every one of his accounts!! And then call Woodhouse, then we'll see how long Sterling can go without suckling at my teat!\" -- Malory Archer" => "http://static.tvfanatic.com/images/gallery/malory-archer-picture_72x250.jpg",
     "\"Barry, does this make up for Framboise? It does, other Barry, it sure does.\" -- Barry Dillon" => "http://images4.wikia.nocookie.net/__cb20110422175445/archer/images/thumb/a/a4/BarryCyborg.png/514px-BarryCyborg.png",
     # "\"And I love that I have an erection, that didn't involve homeless people.\" -- Dr. Kreiger" => "http://www.shc.edu/theolibrary/graphics/homeless.jpg",
