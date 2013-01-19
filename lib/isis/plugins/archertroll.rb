@@ -5,19 +5,13 @@ require 'isis/plugins/base'
 class Isis::Plugin::ArcherTroll < Isis::Plugin::Base
 
   def respond_to_msg?(msg, speaker)
-
     QUOTES.each do |quote,response|
-      # puts "\t#{msg.white}"
-      # puts "\t#{quote.to_s.black_on_white}"
-      # puts "\t#{quote.to_s.red}"  if( msg <=> quote) == 0
-      # puts "\t#{quote.to_s.blue}"  if msg.match quote
-      # puts "\t#{quote.to_s.green}" if quote.match msg
-
       if (msg <=> quote) == 0
         @response = response
         return true
       end
     end
+
     false
   end
 
@@ -84,7 +78,7 @@ class Isis::Plugin::ArcherTroll < Isis::Plugin::Base
     "\"No, no! He ran from her, to go confess to Lana. But then this one starts going crazy and...long story short I had to drown her in the bathtub.\" -- Pam Poovey" => "http://cdn.memegenerator.net/instances/400x/25541435.jpg",
     # "\"Oh My God you two banged!?\" -- Pam Poovey" => "http://media.tumblr.com/tumblr_m7ebtepGb21r2isst.jpg",
     "\"I don't know what that means Pam. I wasn't raised on a cheese farm..\" -- Cheryl Tunt" => "http://www.photostaud.com/img/fotogalerie/dutch-farms-destination/holland-farms-001.3.jpg",
-    # "\"Did Cyril run past here sobbing in a woman's bathrobe?\" -- Lana Kane",  => "http://i81.photobucket.com/albums/j225/SCSnare/woodhouse.gif",
+    "\"Did Cyril run past here sobbing in a woman's bathrobe?\" -- Lana Kane" => "http://i81.photobucket.com/albums/j225/SCSnare/woodhouse.gif",
     # "\"Running up and down in your cheap Fiachi knockoffs, half-naked, tits bouncing around like you're at a rodeo.\" -- Malory Archer" => "http://www.ableammo.com/catalog/images/ssi-2010/medium/fiocchi_762SOVA123box.jpg",
     # "\"I tried, but you were naked, and it was all vulva this and...\" -- Cyril Figgis" => "http://granitegrok.com/pix2/I%20tried%20it%20at%20home.jpg",
     # "\"Worst case scenario: Her cover's been blown and Skorpio is now raping her senseless before chopping her mangled corpse into fish chum.\" -- Sterling Archer" => "http://www.magicbait.com/mm5/graphics/00000001/FishChum-s.jpg",
