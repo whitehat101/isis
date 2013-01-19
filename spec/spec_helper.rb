@@ -3,7 +3,6 @@ require 'spork'
 
 Spork.prefork do
   $:<< File.join(File.dirname(__FILE__), '../lib')
-  require 'isis'
   require 'rspec/autorun'
 
   RSpec.configure do |config|
@@ -13,5 +12,6 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  require 'isis'
   Dir[File.join(ROOT_FOLDER,"spec/support/**/*.rb")].each {|f| require f }
 end
