@@ -3,7 +3,7 @@ require 'isis/plugins/base'
 class Isis::Plugin::Uptime < Isis::Plugin::Base
   def initialize
     @boot = Time.now
-    puts "Uptime-boot #{@boot}"
+    # puts "Uptime-boot #{@boot}"
   end
 
   def respond_to_msg?(msg, speaker)
