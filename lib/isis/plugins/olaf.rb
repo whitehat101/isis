@@ -17,9 +17,8 @@ class Isis::Plugin::Olaf < Isis::Plugin::Base
       "Skrelnick"
     when "home", "where"
       "Moscow"
-    when "commands", nil
+    else
       "Understood commands for !olaf: metal, berserker, berzerker, sing, girl, home, where"
     end
   end
 end
-
