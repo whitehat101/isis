@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe Isis::Plugin::Archer do
-  it "works" do
-    plugin = Isis::Plugin::Archer.new
-    plugin.receive_message("hello", "speaker", nil).should be nil
+  let(:speaker) { Random.speaker }
+
+  it "ignores most things" do
+    subject.receive_message( Random.message, speaker ).should not_respond
   end
+
   it "responds to !archer" do
-    plugin = Isis::Plugin::Archer.new
-    plugin.receive_message("!archer", "speaker", nil).should be_a_kind_of String
+    subject.receive_message( "!archer", speaker ).should respond_with_a_message
   end
+
 end

@@ -28,7 +28,10 @@ gem 'amatch'
 gem 'em-timers', :git => "https://github.com/g1nn13/em-timers.git"
 
 group :test do
+  gem 'spork'
   gem 'rspec'
   gem 'guard-rspec'
   gem 'guard-bundler'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'random_data'
 end

@@ -1,9 +1,10 @@
 # More info at https://github.com/guard/guard#readme
+interactor :off
+
 guard 'bundler' do watch('Gemfile') end
 
 # cli: --color --format nested --fail-fast
-# , :cli => "--drb"
-guard 'rspec' do
+guard 'rspec', cli: '--drb' do
   watch(%r{^spec/.+_spec\.rb$}) { |m| m[0] }
   # watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }`
   watch('spec/spec_helper.rb')  { "spec" }
