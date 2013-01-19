@@ -1,15 +1,15 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Isis::Plugin::EpicFail do
+describe Isis::Plugin::FML do
   let(:speaker) { Random.speaker }
   triggers = [
-    'fail',
-    '(yuno) fail',
-    "FAIL",
-    "¡EPIC FAIL!",
-    "fail-panda",
-    "-fail-",
+    'fml',
+    '!fml',
+    "fml #{Random.alphanumeric}",
+    "--!fml",
+    "¿fml?",
+    "¿!fml?",
   ]
 
   it "ignores most things" do
@@ -19,14 +19,12 @@ describe Isis::Plugin::EpicFail do
   triggers.each do |keyword|
     it "responds to #{keyword}" do
       subject.respond_to_msg?( keyword, speaker ).should be_true
+      # subject.receive_message( keyword, speaker ).should respond_with_a_message
     end
   end
 
   it "outputs good stuff" do
-    response = subject.response
-    response.should respond_with_a_message
-    response.should be_a_kind_of Array
-    response.length.should be 2
+    subject.response.should match /^FML/
   end
 
 end

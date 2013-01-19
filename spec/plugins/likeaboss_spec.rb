@@ -1,19 +1,14 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe Isis::Plugin::Olaf do
+describe Isis::Plugin::LikeABoss do
   let(:speaker) { Random.speaker }
   triggers = [
-    '!olaf',
-    '!OLAF',
-    "!olaf metal",
-    "!olaf berserker",
-    "!olaf berzerker",
-    "!olaf sing",
-    "!olaf girl",
-    "!olaf home",
-    "!olaf where",
-    "!olaf commands",
+    'like a boss',
+    'like a baus',
+    'like a bau5',
+    'like a bossman',
+    'ladylike a bossman',
   ]
 
   it "ignores most things" do

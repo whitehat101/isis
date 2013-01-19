@@ -18,7 +18,8 @@ describe Isis::Plugin::Bash do
 
   triggers.each do |keyword|
     it "responds to #{keyword}" do
-      subject.receive_message( keyword, speaker ).should respond_with_a_message
+      subject.respond_to_msg?( keyword, speaker ).should be_true
+      # subject.receive_message( keyword, speaker ).should respond_with_a_message
     end
   end
 
