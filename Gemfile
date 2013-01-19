@@ -26,3 +26,9 @@ gem 'twss'
 gem 'nokogiri'
 gem 'amatch'
 gem 'em-timers', :git => "https://github.com/g1nn13/em-timers.git"
+
+group :test do
+  gem 'rspec'
+  gem 'guard-rspec'
+  gem 'guard-bundler'
+end
