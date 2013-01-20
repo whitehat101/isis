@@ -14,11 +14,6 @@ gem 'spoon'
 gem 'smackr', '0.0.3.a', :git => "git://github.com/where/smackr.git", :platform => 'jruby'
 
 
-
-gem "colored", "~> 1.2"
-
-
-
 # Campfire
 gem 'tinder'
 
@@ -27,6 +22,8 @@ gem 'twss'
 gem 'nokogiri'
 gem 'amatch'
 gem 'em-timers', :git => "https://github.com/g1nn13/em-timers.git"
+
+gem "colored", "~> 1.2"
 
 group :test do
   gem 'spork'

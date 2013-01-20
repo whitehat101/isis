@@ -2,3 +2,4 @@ config.yml
 tmp/
 *.pid
 .rbenv-version
+.ruby-version

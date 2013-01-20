@@ -1,12 +1,18 @@
 # Run Your own Chat Bot on HipChat / Campfire
 
-  Tested with:
+## Recommended Rubies
 
-  * 1.8.7-p371 (use xmpp4r ruby-1.8.7 branch / utf-8 exceptions)
+  * MRI 1.9.3
+  * jRuby 1.7.0
+
+## Tested
+
   * 1.9.2-p320
   * 1.9.3-rc1
   * jruby-1.7.0
   * jruby-1.7.2
+
+*MRI 1.8.7 recently worked, but is currently suffering from unknown exceptions*
 
 # Services
 
