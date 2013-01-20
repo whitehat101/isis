@@ -92,7 +92,10 @@ module Isis
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
           goodbye_message
-          EventMachine::Timer.new(1) { EventMachine::stop_event_loop }
+          EventMachine::Timer.new(1) do
+            EventMachine::stop_event_loop
+            exit
+          end
         end
       end
     end
