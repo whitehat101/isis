@@ -1,10 +1,11 @@
-source 'https://rubygems.org'
+source ENV['LOCALGEMS'] or 'https://rubygems.org'
 
 ## MRI
 gem 'daemons'
 # Hipchat (XMPP4R)
-# The released xmppr4 gem is quite dated, and has bugs
+# The published xmpp4r gem is abandoned and buggy
 gem 'xmpp4r', :git => "https://github.com/whitehat101/xmpp4r.git"
+# gem 'xmpp4r', :git => "https://github.com/whitehat101/xmpp4r.git", :branch => "ruby-1.8.7"
 
 
 ## jRuby
