@@ -62,7 +62,7 @@ module Isis
     def join
       begin
         connection.join
-      # EventMachine::Timer.new(1) { speak config['bot']['hello'] }
+        EventMachine::Timer.new(1) { hello_message }
       rescue => e
         puts "## EXCEPTION in Chatbot join: #{e.message}"
         recover_from_exception
@@ -91,10 +91,22 @@ module Isis
         trap(sig) do
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
-          # speak config['bot']['goodbye']
+          goodbye_message
           EventMachine::Timer.new(0) { EventMachine::stop_event_loop }
         end
       end
+    end
+
+    def hello_message
+      raw = config['bot']['hello']
+      plugin = @plugins.select {|p| p.class.name == "Isis::Plugin::#{raw}" }
+      speak (plugin.empty? ? raw : plugin.first.response)
+    end
+
+    def goodbye_message
+      raw = config['bot']['goodbye']
+      plugin = @plugins.select {|p| p.class.name == "Isis::Plugin::#{raw}" }
+      speak (plugin.empty? ? raw : plugin.first.response)
     end
 
     def run
