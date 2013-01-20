@@ -92,21 +92,26 @@ module Isis
           puts "Trapped signal #{sig.to_s}"
           puts "Shutting down gracefully"
           goodbye_message
-          EventMachine::Timer.new(0) { EventMachine::stop_event_loop }
+          EventMachine::Timer.new(1) { EventMachine::stop_event_loop }
         end
       end
     end
 
     def hello_message
-      raw = config['bot']['hello']
-      plugin = @plugins.select {|p| p.class.name == "Isis::Plugin::#{raw}" }
-      speak (plugin.empty? ? raw : plugin.first.response)
+      speak message_or_plugin_response(config['bot']['hello'])
     end
 
     def goodbye_message
-      raw = config['bot']['goodbye']
-      plugin = @plugins.select {|p| p.class.name == "Isis::Plugin::#{raw}" }
-      speak (plugin.empty? ? raw : plugin.first.response)
+      speak message_or_plugin_response(config['bot']['goodbye'])
+    end
+
+    def message_or_plugin_response raw
+      plugin = @plugins.select {|p| p.class.name == "Isis::Plugin::#{raw}" } .first
+      if plugin
+        response = plugin.response rescue "#{plugin.class} does not support random messages"
+      end
+
+      response or raw
     end
 
     def run

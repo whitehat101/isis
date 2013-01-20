@@ -27,6 +27,8 @@ campfire:
   ssl: true
 
 ## BOT SETTINGS ##
+# hello/goodbye messages can either be the name of a plugin, or a string
+# the plugin must be enabled, and not all plugins support this type of message
 bot:
   hello: 'Mainframe: ONLINE'
   goodbye: NO CARRIER
