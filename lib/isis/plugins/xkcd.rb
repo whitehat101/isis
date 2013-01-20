@@ -22,7 +22,7 @@ class Isis::Plugin::XKCD < Isis::Plugin::Base
 
     return case
     when !@dbready
-      @callbacks << [@room,@commands]
+      @callbacks << [@room,@commands] if @room
       ["Hold up, I'm not ready yet."]
 
     when (verb.nil? or verb == "random")
@@ -52,7 +52,7 @@ class Isis::Plugin::XKCD < Isis::Plugin::Base
       @last_comic.to_s
 
     when verb == "reload"
-      @callbacks << [@room,@commands]
+      @callbacks << [@room,@commands] if @room
       load_archive
 
     when (verb == "commands" or verb == "help" or verb == "--help" or verb == "-h")
