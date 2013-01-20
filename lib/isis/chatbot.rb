@@ -47,8 +47,7 @@ module Isis
     # Recreate connection with no history loading, so we don't load any messages
     # that may have triggered the exception
     def recover_from_exception
-      # WARN: campfire users will likely recieve an additional exception here
-      config['hipchat']['history'] = 0
+      config['hipchat']['history'] = 0 rescue {}
       create_connection
     end
 
