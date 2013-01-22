@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/whitehat101/xmpp4r.git
-  revision: a4b0cffaa7d755f588a1728bebf1a7e3d254e2ea
+  revision: bb29784f9ebd86c8d0fe243c8bd3f9b1a357f237
   specs:
     xmpp4r (0.5)
       nokogiri
