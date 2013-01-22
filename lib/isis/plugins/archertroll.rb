@@ -16,7 +16,13 @@ class Isis::Plugin::ArcherTroll < Isis::Plugin::Base
   end
 
   def response
-    @response.to_s
+    if rand < 0.75
+      @response
+    else
+      [ "https://s3.amazonaws.com/uploads.hipchat.com/1859/39316/sj38k7kr6kp9uty/upload.png",
+        "https://s3.amazonaws.com/uploads.hipchat.com/1859/39316/blntaqyc29redhn/upload.png",
+      ].sample
+    end
   end
 
   QUOTES = {
