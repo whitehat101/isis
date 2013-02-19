@@ -28,7 +28,7 @@ module Isis
     def create_connection
       begin
         require "isis/connections/#{config['service']}"
-      rescue
+      rescue LoadError
         raise "Unknown service - please check your config.yml"
       end
 
