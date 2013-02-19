@@ -14,7 +14,10 @@ module Isis
     end
 
     def load_config
-      @config = YAML::load(File.read(File.join(ROOT_FOLDER, 'config.yml')))
+      @config = YAML::load_file(File.join ROOT_FOLDER, 'config.yml')
+    rescue SyntaxError => e
+      puts "YAML Syntax error: #{e}"
+      exit -1
     end
 
     def load_plugins
