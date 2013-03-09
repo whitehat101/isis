@@ -1,3 +1,4 @@
+# encoding: utf-8
 # HipChat connection
 # Uses HipChat's XMPP connection
 
@@ -28,7 +29,16 @@ class Isis::Connections::HipChat < Isis::Connections::Base
   end
 
   def connect
-    @client.connect
+    attempt = 0
+    begin
+      @client.connect
+    rescue SocketError => e
+      # The Network is down
+      rest = 5*(1+Math::log(attempt += 1)) # 5, 8.5, 10.5, 12, 13, 14, ...
+      puts "Network Error(#{attempt}): #{e}", "Sleeping #{"%.1f"%rest}s then rereting…"
+      sleep rest
+      retry
+    end
     @client.auth(@config['hipchat']['password'])
     send_jabber_presence
     @join_time = Time.now
