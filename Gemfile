@@ -1,4 +1,4 @@
-source ENV['LOCALGEMS'] or 'https://rubygems.org'
+source 'https://rubygems.org'
 
 ## MRI
 gem 'daemons'

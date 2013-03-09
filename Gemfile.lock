@@ -20,7 +20,7 @@ GIT
       rdoc (> 2.4.2)
 
 GEM
-  remote: http://rubygems.dev/
+  remote: https://rubygems.org/
   specs:
     activesupport (3.0.9)
     addressable (2.2.6)
